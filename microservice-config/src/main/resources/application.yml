@@ -1,0 +1,37 @@
+server:
+  port: 5555
+
+spring:
+  profiles:
+    active: "dev"
+  cloud:
+   config:
+     server:
+        git:
+          uri: https://gitlab.com/12app/msa-cart.git
+          username: "mhari.tech"    
+          password: "09g81a0505"
+        health:
+          repositories:
+             customer-service:
+              label: master
+             discovery-service:
+               label: master   
+---
+spring:
+  profiles: dev
+  
+
+eureka:
+  instance:
+    hostname: configserver
+    preferIpAddress: true 
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+management:
+   security:
+     enabled: false

@@ -1,0 +1,40 @@
+
+spring:
+  profiles:
+    active: "dev"
+  freemarker:
+    enabled: false           
+#  zipkin:
+#     locator:
+#      discovery:
+#        enabled: true
+#     service:
+#         name: inventory   
+eureka: 
+   instance:
+    leaseRenewalIntervalInSeconds: 5  
+    preferIpAddress: true    
+server:
+  port: ${inventory.port}    
+---
+spring:
+  profiles: dev
+  jpa:
+    database: MYSQL
+    show-sql: true
+  hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.MySQLDialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/msa_cart
+    username: root
+    password: welcome_123!
+    driver-class-name: com.mysql.jdbc.Driver 
+   
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:${inventory.discovery.port}/eureka/     
+  
+
+    

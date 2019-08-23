@@ -1,0 +1,30 @@
+#notice the use of profiles one for localhost, one for docker
+spring:
+  profiles:
+    active: "dev"
+  main:
+    banner-mode: "off"  
+  freemarker:
+    enabled: false           
+
+eureka:
+   instance:
+       leaseRenewalIntervalInSeconds: 5   
+       preferIpAddress: true 
+  
+server:
+  port: ${zipkin.port} 
+        
+---
+
+spring:
+  profiles: dev
+ 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:${discovery.port}/eureka/ 
+
+
+ 
+    
